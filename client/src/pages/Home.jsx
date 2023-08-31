@@ -5,7 +5,7 @@ import TodoList from "../components/TodoList";
 import StickyNotes from "../components/StickyNotes";
 import Calendar from "../components/Calendar";
 
-function Home() {
+function Home({ modals }) {
   const [selectedLink, setSelectedLink] = useState("todolist");
 
   const clickedLink = (link) => {

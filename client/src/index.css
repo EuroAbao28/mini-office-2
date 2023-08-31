@@ -1,21 +1,41 @@
 @import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;600;700;800&display=swap");
 
 :root {
+  /* blacks */
   --black-8: rgba(0, 0, 0, 0.8);
   --black-6: rgba(0, 0, 0, 0.6);
   --black-4: rgba(0, 0, 0, 0.4);
   --black-3: rgba(0, 0, 0, 0.3);
   --black-2: rgba(0, 0, 0, 0.2);
   --black-1: rgba(0, 0, 0, 0.1);
+
+  /* accent colors */
+  --acnt-red: hsl(354, 100%, 86%);
+  --acnt-orange: hsl(32, 100%, 86%);
+  --acnt-yellow: hsl(60, 100%, 86%);
+  --acnt-green: hsl(133, 100%, 86%);
+  --acnt-blue: hsl(206, 100%, 86%);
+  --acnt-purple: hsl(294, 100%, 86%);
+
+  /* bg colors */
   --bg-grey: #f4f4f4;
   --hover-bg-grey: #ebebeb;
   --bg-blue: rgb(209, 234, 237);
+
+  /* box shadows */
   --shadow-regular: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   --shadow-card: rgba(17, 17, 26, 0.05) 0px 1px 0px,
     rgba(17, 17, 26, 0.1) 0px 0px 8px;
   --shadow-card-hover: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  --shadow-modal: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  --shadow-button:
+   /* 1 */ rgba(0, 0, 0, 0.1) 0px 2px 4px,
+    /* 2 */ rgba(0, 0, 0, 0.1) 0px -3px 0px inset;
+  --shadow-button-pressed:
+   /* 1 */ rgba(0, 0, 0, 0.1) 0px 2px 4px,
+    /* 2 */ rgba(0, 0, 0, 0) 0px -3px 0px inset;
 }
 
 * {
@@ -28,6 +48,18 @@
 html {
   font-size: 62.5%;
 }
+
+input:focus,
+button:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* highlight disable */
+/* -webkit-user-select: 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; Standard syntax */
 
 /* SCROLL BAR */
 /* width */

@@ -1,0 +1,140 @@
+.modal-addStickyNotes-container {
+  background-color: var(--black-1);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--black-8);
+}
+
+.modal-addStickyNotes-container .modal-form-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 30%;
+  box-shadow: var(--shadow-modal);
+}
+
+.modal-addStickyNotes-container .header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--black-8);
+  margin-bottom: 1rem;
+}
+
+.modal-addStickyNotes-container .header h1 {
+  font-size: 2.1rem;
+}
+
+.modal-addStickyNotes-container .header .icon {
+  padding: 0.5rem;
+  font-size: 3rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-addStickyNotes-container .header .icon:hover {
+  background-color: var(--bg-grey);
+}
+
+.modal-addStickyNotes-container .modal-form-container label {
+  font-size: 1.4rem;
+}
+
+.modal-addStickyNotes-container .modal-form-container input[type="text"],
+.modal-addStickyNotes-container .modal-form-container textarea {
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid var(--black-2);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  color: var(--black-8);
+}
+
+.modal-addStickyNotes-container .modal-form-container textarea {
+  min-width: 100%;
+}
+
+.modal-addStickyNotes-container .modal-form-container .button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.modal-addStickyNotes-container .modal-form-container button {
+  border: none;
+  background-color: var(--acnt-blue);
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-button);
+  transition: 0.15s ease-in-out;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer */
+  user-select: none; /* Standard syntax */
+}
+
+.modal-addStickyNotes-container .modal-form-container button:active {
+  box-shadow: var(--shadow-button-pressed);
+}
+.modal-addStickyNotes-container .colors-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.modal-addStickyNotes-container .colors-container .item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  border-radius: 2px;
+  padding: 0.2rem 1rem;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer */
+  user-select: none; /* Standard syntax */
+}
+
+.modal-addStickyNotes-container .colors-container .item input {
+  width: auto;
+  margin: auto 0;
+}
+
+.modal-addStickyNotes-container .colors-container .item label {
+  width: 100%;
+}
+
+/* colors label*/
+.modal-addStickyNotes-container .colors-container .green {
+  background-color: var(--acnt-green);
+}
+
+.modal-addStickyNotes-container .colors-container .blue {
+  background-color: var(--acnt-blue);
+}
+
+.modal-addStickyNotes-container .colors-container .purple {
+  background-color: var(--acnt-purple);
+}
+
+.modal-addStickyNotes-container .colors-container .red {
+  background-color: var(--acnt-red);
+}
+
+.modal-addStickyNotes-container .colors-container .orange {
+  background-color: var(--acnt-orange);
+}
+
+.modal-addStickyNotes-container .colors-container .yellow {
+  background-color: var(--acnt-yellow);
+}

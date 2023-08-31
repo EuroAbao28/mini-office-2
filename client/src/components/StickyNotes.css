@@ -50,7 +50,7 @@
 
 .stickynotes-container .child-container .note-container {
   padding: 2rem;
-  background-color: rgb(153, 181, 253);
+  background-color: var(--acnt-blue);
   border-radius: 0.5rem;
   box-shadow: var(--shadow-card);
   overflow-wrap: break-word;
