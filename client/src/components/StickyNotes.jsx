@@ -5,6 +5,9 @@ import ModalAddStickyNotes from "./ModalAddStickyNotes";
 
 function StickyNotes() {
   const [isModalShow, setIsModalShow] = useState(false);
+  const [notes, setNotes] = useState([
+    { title: "Sample Title", body: "This is my body...", color: "BLUE" },
+  ]);
 
   const addNote = () => {
     setIsModalShow(!isModalShow);
@@ -13,7 +16,10 @@ function StickyNotes() {
   return (
     <>
       {isModalShow ? (
-        <ModalAddStickyNotes modalState={(state) => setIsModalShow(state)} />
+        <ModalAddStickyNotes
+          modalState={(state) => setIsModalShow(state)}
+          newNote={(note) => setNotes([...notes, note])}
+        />
       ) : (
         ""
       )}
@@ -27,13 +33,12 @@ function StickyNotes() {
         </div>
         <div className="stickynotes-content-container">
           <div className="child-container">
-            <div className="note-container">
-              <p className="title">Card Title</p>
-              <p className="body">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Accusantium, ullam.
-              </p>
-            </div>
+            {notes.map((note, index) => (
+              <div key={index} className="note-container">
+                <p className="title">{note.title}</p>
+                <p className="body">{note.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -46,9 +46,11 @@
   flex-wrap: wrap;
   gap: 2rem;
   position: absolute;
+  background-color: red;
+  width: 100%;
 }
 
-.stickynotes-container .child-container .note-container {
+.stickynotes-container .child-container > .note-container {
   padding: 2rem;
   background-color: var(--acnt-blue);
   border-radius: 0.5rem;
@@ -56,11 +58,12 @@
   overflow-wrap: break-word;
   cursor: pointer;
   transition: 0.1s ease-in-out;
-  /*---- adjust here ----*/
-  max-width: 30%;
-  min-width: 20%;
-  max-height: none;
-  min-height: 10rem;
+
+  /* adjust here */
+  align-self: flex-start;
+  flex-grow: 1;
+  min-width: 20rem;
+  max-width: 50rem;
 }
 
 .stickynotes-container .note-container:hover {

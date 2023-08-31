@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ModalAddStickyNotes.css";
 import { LuXSquare } from "react-icons/lu";
 
-function ModalAddStickyNotes({ modalState }) {
+function ModalAddStickyNotes({ modalState, newNote }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [color, setColor] = useState("");
@@ -19,6 +19,12 @@ function ModalAddStickyNotes({ modalState }) {
       console.log(`Title: ${title}`);
       console.log(`Body: ${body}`);
       console.log(`Color: ${color}`);
+
+      newNote({
+        title: title,
+        body: body,
+        color: color,
+      });
     } else {
       console.log("All fields are required");
     }
