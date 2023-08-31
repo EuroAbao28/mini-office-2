@@ -1,0 +1,83 @@
+.stickynotes-container {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.stickynotes-container .header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--black-8);
+}
+
+.stickynotes-container .header .add-container {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.stickynotes-container .add-container:hover {
+  background-color: var(--bg-grey);
+}
+
+.stickynotes-container h1 {
+  font-size: 4rem;
+}
+
+.stickynotes-content-container {
+  flex: 1;
+  display: flex;
+  border: 1px solid var(--black-1);
+  border-radius: 1rem;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.stickynotes-container .child-container {
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  position: absolute;
+}
+
+.stickynotes-container .child-container .note-container {
+  padding: 2rem;
+  background-color: rgb(153, 181, 253);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-card);
+  overflow-wrap: break-word;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+  /*---- adjust here ----*/
+  max-width: 30%;
+  min-width: 20%;
+  max-height: none;
+  min-height: 10rem;
+}
+
+.stickynotes-container .note-container:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-0.5rem);
+}
+
+.stickynotes-container .note-container .title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--black-1);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: var(--black-8);
+}
+
+.stickynotes-container .note-container .body {
+  font-size: 1.4rem;
+  color: var(--black-8);
+}

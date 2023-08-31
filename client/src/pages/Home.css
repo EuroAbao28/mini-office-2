@@ -1,0 +1,12 @@
+.home-container {
+  background-color: white;
+  height: 100vh;
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.home-container .home-child-container {
+  flex: 1;
+  display: flex;
+}

@@ -1,0 +1,80 @@
+.login-container {
+  height: 100vh;
+  background-color: var(--bg-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--black-8);
+}
+
+.login-container .form {
+  background-color: white;
+  padding: 2rem;
+  font-size: 1.4rem;
+  display: flex;
+  gap: 2rem;
+  width: 70%;
+  box-shadow: var(--shadow-regular);
+  border-radius: 1rem;
+}
+
+.login-container .form .left {
+  flex: 1;
+}
+
+.login-container .form .left img {
+  width: 100%;
+}
+
+.login-container .form .right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  outline: 1px solid var(--black-1);
+  border-radius: 1.75rem;
+  padding: 2rem;
+}
+
+.login-container .form .right h2 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 4.8rem;
+}
+
+.login-container .form .right form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container form input {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--black-2);
+  border-radius: 0.5rem;
+}
+
+.login-container form input::placeholder {
+  color: var(--black-2);
+}
+
+.login-container button {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--bg-blue);
+  border: 1px solid var(--bg-blue);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.login-container .right .bottom-div p {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--black-4);
+}
+
+.login-container .bottom-div p a {
+  cursor: pointer;
+  color: var(--black-4);
+}
