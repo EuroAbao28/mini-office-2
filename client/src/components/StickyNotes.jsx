@@ -69,19 +69,20 @@ function StickyNotes() {
                 className="note-container"
                 style={{ backgroundColor: note.color }}
                 onClick={() => handleClickedNote(index)}>
-                {/* show option if the note index is matched */}
-                {clickedNote === index && (
-                  <div
-                    className="note-option-container"
-                    style={{ backgroundColor: note.color }}>
-                    <LuCopy
-                      onClick={() => handleCopyNote(note.body)}
-                      className="copy"
-                    />
-                    <LuEdit className="edit" />
-                    <LuTrash2 className="delete" />
-                  </div>
-                )}
+                {/* add the extra classname for animation if the note index is matched */}
+                <div
+                  className={`note-option-container ${
+                    clickedNote === index ? "visible" : "hidden"
+                  }`}
+                  style={{ backgroundColor: note.color }}>
+                  <LuCopy
+                    onClick={() => handleCopyNote(note.body)}
+                    className="copy"
+                  />
+                  <LuEdit className="edit" />
+                  <LuTrash2 className="delete" />
+                </div>
+
                 <p className="title">{note.title}</p>
                 <p className="body">{note.body}</p>
               </div>
