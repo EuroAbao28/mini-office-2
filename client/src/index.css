@@ -17,6 +17,14 @@
   --acnt-blue: hsl(206, 100%, 86%);
   --acnt-purple: hsl(294, 100%, 86%);
 
+  /* accent colors darkened */
+  --acnt-red-drk: hsl(354, 100%, 70%);
+  --acnt-orange-drk: hsl(32, 100%, 70%);
+  --acnt-yellow-drk: hsl(60, 100%, 70%);
+  --acnt-green-drk: hsl(133, 100%, 70%);
+  --acnt-blue-drk: hsl(206, 100%, 70%);
+  --acnt-purple-drk: hsl(294, 100%, 70%);
+
   /* bg colors */
   --bg-grey: #f4f4f4;
   --hover-bg-grey: #ebebeb;

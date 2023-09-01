@@ -25,6 +25,9 @@ function ModalAddStickyNotes({ modalState, newNote }) {
         body: body,
         color: color,
       });
+
+      // then close the modal
+      modalState(false);
     } else {
       console.log("All fields are required");
     }

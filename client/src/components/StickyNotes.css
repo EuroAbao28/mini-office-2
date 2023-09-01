@@ -46,21 +46,20 @@
   flex-wrap: wrap;
   gap: 2rem;
   position: absolute;
-  background-color: red;
   width: 100%;
 }
 
 .stickynotes-container .child-container > .note-container {
   padding: 2rem;
-  background-color: var(--acnt-blue);
   border-radius: 0.5rem;
   box-shadow: var(--shadow-card);
   overflow-wrap: break-word;
   cursor: pointer;
   transition: 0.1s ease-in-out;
+  position: relative;
 
   /* adjust here */
-  align-self: flex-start;
+  align-self: flex-start; /* keeps the card wrap content */
   flex-grow: 1;
   min-width: 20rem;
   max-width: 50rem;
@@ -83,4 +82,32 @@
 .stickynotes-container .note-container .body {
   font-size: 1.4rem;
   color: var(--black-8);
+}
+
+.stickynotes-container .note-option-container {
+  position: absolute;
+  top: -1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: var(--shadow-card);
+  z-index: 10;
+}
+
+.note-option-container > * {
+  color: var(--black-8);
+  border-radius: 5px;
+  font-size: 3.5rem;
+  padding: 0.75rem;
+  flex: 1;
+  transition: 0.15s ease-in-out;
+}
+
+.note-option-container > *:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.note-option-container .copy:active {
+  background-color: rgba(111, 111, 111, 0.1);
 }
