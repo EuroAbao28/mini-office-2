@@ -69,7 +69,7 @@ function StickyNotes() {
                 className="note-container"
                 style={{ backgroundColor: note.color }}
                 onClick={() => handleClickedNote(index)}>
-                {/* add the extra classname for animation if the note index is matched */}
+                {/* add the extra classname for if the note index is matched */}
                 <div
                   className={`note-option-container ${
                     clickedNote === index ? "visible" : "hidden"
