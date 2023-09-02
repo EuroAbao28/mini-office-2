@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import loginPNG from "../assets/login.png";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+
+  const handleForm = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    const loginURL = "http://localhost:5000/api/users/login";
+
+    axios
+      .post(loginURL, formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
 
   return (
     <div className="login-container">
@@ -14,22 +43,26 @@ function Login() {
         </div>
         <div className="right">
           <h2>Login</h2>
-          <form>
+          <form onSubmit={handleLogin}>
             <label htmlFor="email">Email Address</label>
-            <input type="email" id="email" placeholder="you@example.com" />
+            <input
+              type="email"
+              id="email"
+              placeholder="you@example.com"
+              name="email"
+              value={email}
+              onChange={handleForm}
+            />
             <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               placeholder="Enter 6 character or more"
+              name="password"
+              value={password}
+              onChange={handleForm}
             />
-            <button
-              type="submit"
-              onClick={() => {
-                navigate("/");
-              }}>
-              LOG IN
-            </button>
+            <button type="submit">LOG IN</button>
           </form>
           <div className="bottom-div">
             <p>
