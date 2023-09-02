@@ -41,10 +41,7 @@ const loginUser = async (req, res) => {
   // Find user from db
   const user = await userModel.findOne({ email });
 
-  // Check if the password is matched
-  const isPasswordMatched = await bcrypt.compare(password, user.password);
-
-  if (user && isPasswordMatched) {
+  if (user && (await bcrypt.compare(password, user.password))) {
     return res
       .status(200)
       .json({ message: "Login successfully", token: generateToken(user) });
