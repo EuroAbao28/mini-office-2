@@ -29,6 +29,8 @@ function Login() {
       .post(loginURL, formData)
       .then((response) => {
         console.log(response.data);
+        localStorage.setItem("user_token", response.data.token);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.response.data);
