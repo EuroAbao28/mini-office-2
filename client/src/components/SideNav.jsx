@@ -10,12 +10,17 @@ import {
 import "./SideNav.css";
 import { useNavigate } from "react-router-dom";
 
-function SideNav({ clickedLink }) {
+function SideNav({ clickedLink, username }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(true);
 
   const linkSetter = (passedLink) => {
     clickedLink(passedLink);
+  };
+
+  const handleSignout = () => {
+    localStorage.removeItem("user_token");
+    navigate("/login");
   };
 
   return (
@@ -53,9 +58,9 @@ function SideNav({ clickedLink }) {
           <div className="bottom">
             <div className="tab-container">
               <LuUser className="icon" />
-              OrueGods
+              {username && username}
             </div>
-            <div className="tab-container" onClick={() => navigate("/login")}>
+            <div className="tab-container" onClick={handleSignout}>
               <LuLogOut className="icon" />
               Sign out
             </div>

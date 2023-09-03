@@ -2,6 +2,52 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
 
+const checkUserToken = async (req, res) => {
+  const { userToken } = req.body;
+
+  if (!userToken)
+    return res.status(400).json({ message: "From checkUserToken: No token" });
+
+  jwt.verify(userToken, process.env.JWT_SECRET, async (error, decoded) => {
+    if (error) {
+      return res.status(400).json({ message: error });
+    } else {
+      const userTokenPayload = decoded.payload;
+
+      try {
+        const user = await userModel.findOne({ email: userTokenPayload[0] });
+
+        if (!user) {
+          return res
+            .status(404)
+            .json({ message: "Token is Valid, User not found" });
+        }
+
+        res
+          .status(200)
+          .json({ message: "This user is verified", userDetails: user });
+      } catch (error) {
+        return res.status(500).json({ message: error });
+      }
+
+      // return res.status(201).json({
+      //   message: "Token verified successfuly",
+      //   decodedToken: userTokenPayload,
+      // });
+    }
+  });
+
+  // Ito ang laman ng decoded na userToken
+  //   {
+  //   payload: [
+  //     'test@user.com',
+  //     '$2a$10$kmaYE6fYI/xAaHtDw1hGnOMvQVeCkGE5245n86CPVo5XYzqwnmaWi'
+  //   ],
+  //   iat: 1693748538,
+  //   exp: 1694612538
+  // }
+};
+
 const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -56,4 +102,4 @@ const generateToken = (userData) => {
   return jwt.sign({ payload }, process.env.JWT_SECRET, { expiresIn: "10d" });
 };
 
-module.exports = { registerUser, loginUser };
+module.exports = { checkUserToken, registerUser, loginUser };

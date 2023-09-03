@@ -28,7 +28,6 @@ function Login() {
     axios
       .post(loginURL, formData)
       .then((response) => {
-        console.log(response.data);
         localStorage.setItem("user_token", response.data.token);
         navigate("/");
       })

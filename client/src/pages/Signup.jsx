@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./Login.css";
 import loginPNG from "../assets/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -29,6 +30,7 @@ function Signup() {
       .post(registerURL, formData)
       .then((response) => {
         console.log(response.data);
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error.response.data);
