@@ -29,11 +29,6 @@ const checkUserToken = async (req, res) => {
       } catch (error) {
         return res.status(500).json({ message: error });
       }
-
-      // return res.status(201).json({
-      //   message: "Token verified successfuly",
-      //   decodedToken: userTokenPayload,
-      // });
     }
   });
 
