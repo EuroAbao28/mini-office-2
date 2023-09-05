@@ -6,8 +6,8 @@ function TodoList() {
   return (
     <div className="todolist-container">
       <div className="header">
-        <button>Open SideNav</button>
         <h1>Todo List</h1>
+        <HiMenuAlt3 />
       </div>
     </div>
   );

@@ -41,9 +41,9 @@ function Home() {
     <div className="home-container">
       <SideNav clickedLink={clickedLink} username={userData.username} />
       <div className="home-child-container">
-        {selectedLink == "todolist" ? <TodoList /> : ""}
-        {selectedLink == "stickynotes" ? <StickyNotes /> : ""}
-        {selectedLink == "calendar" ? <Calendar /> : ""}
+        {selectedLink == "todolist" && <TodoList />}
+        {selectedLink == "stickynotes" && <StickyNotes />}
+        {selectedLink == "calendar" && <Calendar />}
       </div>
     </div>
   );
