@@ -24,10 +24,7 @@ function SideNav({ clickedLink, username }) {
   };
 
   return (
-    <div
-      className="sideNav-container"
-      // ayusin mo animation/sidenav
-      style={{ marginLeft: isOpen ? "0" : "-21.6%" }}>
+    <div className={`sideNav-container ${isOpen ? "" : "hidden"}`}>
       <div className="header">
         <h1>Mini Office</h1>
         <HiMenuAlt3 className="icon" onClick={() => setIsOpen(!isOpen)} />
