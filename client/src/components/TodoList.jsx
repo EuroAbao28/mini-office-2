@@ -1,5 +1,5 @@
 import React from "react";
-import { HiMenuAlt3 } from "react-icons/hi";
+import { LuPlusSquare } from "react-icons/lu";
 import "./TodoList.css";
 
 function TodoList() {
@@ -7,7 +7,10 @@ function TodoList() {
     <div className="todolist-container">
       <div className="header">
         <h1>Todo List</h1>
-        <HiMenuAlt3 />
+        <div className="add-container">
+          <LuPlusSquare />
+          Add List
+        </div>
       </div>
     </div>
   );

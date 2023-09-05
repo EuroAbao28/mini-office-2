@@ -27,7 +27,10 @@ function SideNav({ clickedLink, username }) {
     <div className={`sideNav-container ${isOpen ? "" : "hidden"}`}>
       <div className="header">
         <h1>Mini Office</h1>
-        <HiMenuAlt3 className="icon" onClick={() => setIsOpen(!isOpen)} />
+        <HiMenuAlt3
+          className="icon toggleButton"
+          onClick={() => setIsOpen(!isOpen)}
+        />
       </div>
       <div className="content">
         <h3>MENU</h3>
@@ -37,29 +40,29 @@ function SideNav({ clickedLink, username }) {
               className="tab-container"
               onClick={() => linkSetter("todolist")}>
               <LuListChecks className="icon" />
-              Todo list
+              <p>Todo list</p>
             </div>
             <div
               className="tab-container"
               onClick={() => linkSetter("stickynotes")}>
               <LuStickyNote className="icon" />
-              Sticky notes
+              <p>Sticky notes</p>
             </div>
             <div
               className="tab-container"
               onClick={() => linkSetter("calendar")}>
               <LuCalendarDays className="icon" />
-              Calendar
+              <p>Calendar</p>
             </div>
           </div>
           <div className="bottom">
             <div className="tab-container">
               <LuUser className="icon" />
-              {username && username}
+              {username && <p>{username}</p>}
             </div>
             <div className="tab-container" onClick={handleSignout}>
               <LuLogOut className="icon" />
-              Sign out
+              <p>Sign out</p>
             </div>
           </div>
         </div>

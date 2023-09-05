@@ -12,17 +12,9 @@
 }
 
 .sideNav-container.hidden {
-  width: 0;
+  width: 10%;
   padding: 0;
   margin-right: 0;
-}
-
-.sideNav-container.hidden .header h1 {
-  display: none;
-}
-
-.sideNav-container.hidden .content {
-  display: none;
 }
 
 .sideNav-container .header {
