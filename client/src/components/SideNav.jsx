@@ -10,7 +10,7 @@ import {
 import "./SideNav.css";
 import { useNavigate } from "react-router-dom";
 
-function SideNav({ clickedLink, username }) {
+function SideNav({ clickedLink, username, isNavOpen, toggleNav }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(true);
 
@@ -23,13 +23,18 @@ function SideNav({ clickedLink, username }) {
     navigate("/login");
   };
 
+  const handleToggleButton = () => {
+    setIsOpen(false);
+    toggleNav();
+  };
+
   return (
-    <div className={`sideNav-container ${isOpen ? "" : "hidden"}`}>
+    <div className={`sideNav-container ${isNavOpen ? "" : "hidden"}`}>
       <div className="header">
         <h1>Mini Office</h1>
         <HiMenuAlt3
           className="icon toggleButton"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={handleToggleButton}
         />
       </div>
       <div className="content">

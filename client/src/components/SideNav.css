@@ -1,20 +1,56 @@
 .sideNav-container {
   background-color: var(--bg-grey);
-  width: 20%;
   overflow: hidden;
-  transition: 0.25s ease-out;
-  padding: 2rem;
   border-radius: 1rem;
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-right: 2rem;
+  animation-name: sideNavOpenAnim;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
 .sideNav-container.hidden {
-  width: 10%;
-  padding: 0;
-  margin-right: 0;
+  white-space: nowrap;
+  animation-name: sideNavCloseAnim;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes sideNavCloseAnim {
+  0% {
+    opacity: 1;
+    padding: 2rem;
+    width: 20%;
+    margin-right: 2rem;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    width: 0;
+    padding: 0;
+    margin-right: 0;
+  }
+}
+
+@keyframes sideNavOpenAnim {
+  0% {
+    opacity: 0;
+    width: 0;
+    padding: 0;
+    margin-right: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    width: 20%;
+    padding: 2rem;
+    margin-right: 2rem;
+  }
 }
 
 .sideNav-container .header {
@@ -25,8 +61,14 @@
 
 .sideNav-container .header .icon {
   color: var(--black-8);
-  font-size: 2.8rem;
+  font-size: 4rem;
+  padding: 0.5rem;
   cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.sideNav-container .header .icon:hover {
+  background-color: var(--hover-bg-grey);
 }
 
 .sideNav-container .content {

@@ -13,6 +13,40 @@
   color: var(--black-8);
 }
 
+.todolist-container .header .left {
+  display: flex;
+  align-items: center;
+}
+
+.todolist-container .header .left .icon {
+  border-radius: 0.5rem;
+  cursor: pointer;
+  animation-name: iconShowAnim;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes iconShowAnim {
+  0% {
+    font-size: 0;
+    opacity: 0;
+    margin-right: 0;
+    padding: 0;
+    transform: scale(0);
+  }
+  100% {
+    font-size: 4rem;
+    opacity: 1;
+    margin-right: 2rem;
+    padding: 0.5rem;
+    transform: scale(1);
+  }
+}
+
+.todolist-container .header .left .icon:hover {
+  background-color: var(--bg-grey);
+}
+
 .todolist-container .header h1 {
   font-size: 4rem;
 }

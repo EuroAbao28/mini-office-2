@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import copy from "clipboard-copy";
 import "./StickyNotes.css";
 import { LuPlusSquare, LuEdit, LuTrash2, LuCopy } from "react-icons/lu";
+import { HiMenuAlt2 } from "react-icons/hi";
 import ModalAddStickyNotes from "./ModalAddStickyNotes";
 
-function StickyNotes() {
+function StickyNotes({ isNavOpen, toggleNav }) {
   const [isModalShow, setIsModalShow] = useState(false);
   const [notes, setNotes] = useState([]);
 
@@ -55,10 +56,17 @@ function StickyNotes() {
       )}
       <div className="stickynotes-container">
         <div className="header">
-          <h1>Sticky Notes</h1>
+          <div className="left">
+            {isNavOpen == false && (
+              <HiMenuAlt2
+                className="icon"
+                onClick={() => toggleNav()}></HiMenuAlt2>
+            )}
+            <h1>Sticky Notes</h1>
+          </div>
           <div className="add-container" onClick={addNote}>
             <LuPlusSquare />
-            Add note
+            Add new
           </div>
         </div>
         <div className="stickynotes-content-container">

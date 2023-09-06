@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
+  const [isNavOpen, setIsNavOpen] = useState(true);
   const [selectedLink, setSelectedLink] = useState("todolist");
 
   const clickedLink = (link) => {
@@ -37,13 +38,28 @@ function Home() {
     isUserValid();
   }, []);
 
+  const handleSideNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   return (
     <div className="home-container">
-      <SideNav clickedLink={clickedLink} username={userData.username} />
+      <SideNav
+        clickedLink={clickedLink}
+        username={userData.username}
+        isNavOpen={isNavOpen}
+        toggleNav={handleSideNav}
+      />
       <div className="home-child-container">
-        {selectedLink == "todolist" && <TodoList />}
-        {selectedLink == "stickynotes" && <StickyNotes />}
-        {selectedLink == "calendar" && <Calendar />}
+        {selectedLink == "todolist" && (
+          <TodoList isNavOpen={isNavOpen} toggleNav={handleSideNav} />
+        )}
+        {selectedLink == "stickynotes" && (
+          <StickyNotes isNavOpen={isNavOpen} toggleNav={handleSideNav} />
+        )}
+        {selectedLink == "calendar" && (
+          <Calendar isNavOpen={isNavOpen} toggleNav={handleSideNav} />
+        )}
       </div>
     </div>
   );
