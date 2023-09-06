@@ -93,8 +93,10 @@ const loginUser = async (req, res) => {
 
 // Generate JWT
 const generateToken = (userData) => {
-  const payload = [userData.email, userData.password];
-  return jwt.sign({ payload }, process.env.JWT_SECRET, { expiresIn: "10d" });
+  const { id, email, password } = userData;
+  return jwt.sign({ id, email, password }, process.env.JWT_SECRET, {
+    expiresIn: "10d",
+  });
 };
 
 module.exports = { checkUserToken, registerUser, loginUser };
