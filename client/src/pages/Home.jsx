@@ -19,21 +19,25 @@ function Home() {
 
   useEffect(() => {
     const isUserValid = () => {
-      const checkUserTokenURL =
-        "http://localhost:5000/api/users/checkusertoken";
-
       const userToken = localStorage.getItem("user_token");
 
-      axios
-        .post(checkUserTokenURL, { userToken })
-        .then((response) => {
-          console.log(response.data);
-          setUserData(response.data.userDetails);
-        })
-        .catch((error) => {
-          console.log(error.response.data.message);
-          navigate("/login");
-        });
+      if (userToken) {
+        const checkUserTokenURL =
+          "http://localhost:5000/api/users/checkusertoken";
+
+        axios
+          .post(checkUserTokenURL, { userToken })
+          .then((response) => {
+            console.log(response.data);
+            setUserData(response.data.userDetails);
+          })
+          .catch((error) => {
+            console.log(error.response.data.message);
+            navigate("/login");
+          });
+      } else {
+        navigate("/login");
+      }
     };
     isUserValid();
   }, []);
