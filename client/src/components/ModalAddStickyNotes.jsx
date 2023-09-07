@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./ModalAddStickyNotes.css";
 import { LuXSquare } from "react-icons/lu";
+import axios from "axios";
 
-function ModalAddStickyNotes({ modalState, newNote }) {
+function ModalAddStickyNotes({ modalState, refreshData }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [color, setColor] = useState("");
@@ -16,18 +17,28 @@ function ModalAddStickyNotes({ modalState, newNote }) {
 
   const handleCreateNote = () => {
     if (title && body && color) {
-      console.log(`Title: ${title}`);
-      console.log(`Body: ${body}`);
-      console.log(`Color: ${color}`);
+      const createStickyNoteURL = "http://localhost:5000/api/stickynote/";
+      const userToken = localStorage.getItem("user_token");
 
-      newNote({
-        title: title,
-        body: body,
-        color: color,
-      });
+      if (userToken) {
+        // Set the authorization header with the token
+        axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        axios
+          .post(createStickyNoteURL, { title, body, color })
+          .then((response) => {
+            console.log(response.data.message);
 
-      // then close the modal
-      modalState(false);
+            // refresh the data
+            refreshData();
+            // then close the modal
+            modalState(false);
+          })
+          .catch((error) => {
+            console.log(error.response.data.message);
+          });
+      } else {
+        console.log("No token");
+      }
     } else {
       console.log("All fields are required");
     }

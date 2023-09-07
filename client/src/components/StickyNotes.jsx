@@ -47,28 +47,28 @@ function StickyNotes({ isNavOpen, toggleNav }) {
     }
   };
 
+  const getStickyNotes = () => {
+    const getStickyNotesURL = "http://localhost:5000/api/stickynote/";
+    const userToken = localStorage.getItem("user_token");
+
+    if (userToken) {
+      // Set the authorization header with the token
+      axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+      axios
+        .get(getStickyNotesURL)
+        .then((response) => {
+          console.log(response);
+          setNotes(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+        });
+    } else {
+      console.log("No token");
+    }
+  };
+
   useEffect(() => {
-    const getStickyNotes = () => {
-      const getStickyNotesURL = "http://localhost:5000/api/stickynote/";
-
-      const userToken = localStorage.getItem("user_token");
-
-      if (userToken) {
-        // Set the authorization header with the token
-        axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
-        axios
-          .get(getStickyNotesURL)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error.response.data.message);
-          });
-      } else {
-        console.log("wala token");
-      }
-    };
-
     getStickyNotes();
   }, []);
 
@@ -77,7 +77,7 @@ function StickyNotes({ isNavOpen, toggleNav }) {
       {isModalShow && (
         <ModalAddStickyNotes
           modalState={(state) => setIsModalShow(state)}
-          newNote={(note) => setNotes([...notes, note])}
+          refreshData={getStickyNotes}
         />
       )}
       <div className="stickynotes-container">
