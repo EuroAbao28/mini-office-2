@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import copy from "clipboard-copy";
 import "./StickyNotes.css";
 import { LuPlusSquare, LuEdit, LuTrash2, LuCopy } from "react-icons/lu";
 import { HiMenuAlt2 } from "react-icons/hi";
 import ModalAddStickyNotes from "./ModalAddStickyNotes";
+import axios from "axios";
 
 function StickyNotes({ isNavOpen, toggleNav }) {
   const [isModalShow, setIsModalShow] = useState(false);
@@ -45,6 +46,31 @@ function StickyNotes({ isNavOpen, toggleNav }) {
       console.error("Copy failed: ", error);
     }
   };
+
+  useEffect(() => {
+    const getStickyNotes = () => {
+      const getStickyNotesURL = "http://localhost:5000/api/stickynote/";
+
+      const userToken = localStorage.getItem("user_token");
+
+      if (userToken) {
+        // Set the authorization header with the token
+        axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        axios
+          .get(getStickyNotesURL)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error.response.data.message);
+          });
+      } else {
+        console.log("wala token");
+      }
+    };
+
+    getStickyNotes();
+  }, []);
 
   return (
     <>
