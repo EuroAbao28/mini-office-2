@@ -12,10 +12,8 @@ const checkUserToken = async (req, res) => {
     if (error) {
       return res.status(400).json({ message: error });
     } else {
-      const userTokenPayload = decoded.payload;
-
       try {
-        const user = await userModel.findOne({ email: userTokenPayload[0] });
+        const user = await userModel.findOne({ email: decoded.email });
 
         if (!user) {
           return res
@@ -31,16 +29,6 @@ const checkUserToken = async (req, res) => {
       }
     }
   });
-
-  // Ito ang laman ng decoded na userToken
-  //   {
-  //   payload: [
-  //     'test@user.com',
-  //     '$2a$10$kmaYE6fYI/xAaHtDw1hGnOMvQVeCkGE5245n86CPVo5XYzqwnmaWi'
-  //   ],
-  //   iat: 1693748538,
-  //   exp: 1694612538
-  // }
 };
 
 const registerUser = async (req, res) => {

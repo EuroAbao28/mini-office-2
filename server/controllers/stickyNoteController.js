@@ -31,24 +31,33 @@ const updateStickyNote = async (req, res) => {
   const id = req.params.id;
   const data = req.body;
 
-  // AYUSIN MO PA TO
-  // IDAGDAG MO YUNG MIDDLEWARE
-  // DAPAT YUNG USER LANG NA NAKA LOGIN ANG PWEDE MAG UPDATE SA SARILI NYANG NOTES
-
   try {
-    const updatedStickyNote = await stickyNoteModel.findByIdAndUpdate(
-      id,
-      data,
-      {
-        new: true,
+    const stickyNoteData = await stickyNoteModel.findById({ _id: id });
+
+    if (stickyNoteData) {
+      // Check if the user id stickynote and current logged in user id is matched
+      if (stickyNoteData.user.toString() === req.user._id.toString()) {
+        const updatedStickyNote = await stickyNoteModel.findByIdAndUpdate(
+          id,
+          data,
+          {
+            new: true,
+          }
+        );
+        if (!updatedStickyNote) {
+          return res
+            .status(404)
+            .json({ message: "It's your sticky note, but there is an error" });
+        }
+        res.status(201).json({ message: "Sticky note updated successfully" });
+      } else {
+        return res.status(400).json({ message: "That's not your sticky note" });
       }
-    );
-
-    if (!updatedStickyNote) {
-      return res.status(404).json({ message: "Sticky note not found" });
+    } else {
+      return res.status(404).json({
+        message: "Sticky note not found",
+      });
     }
-
-    res.json(updatedStickyNote);
   } catch (error) {
     console.log(`Try catch error ${error}`);
     res.json({ message: error });
@@ -56,7 +65,35 @@ const updateStickyNote = async (req, res) => {
 };
 
 const deleteStickyNote = async (req, res) => {
-  res.send("delete sticky note");
+  const id = req.params.id;
+
+  try {
+    const stickyNoteData = await stickyNoteModel.findById({ _id: id });
+
+    if (stickyNoteData) {
+      // Check if the user id stickynote and current logged in user id is matched
+      if (stickyNoteData.user.toString() === req.user._id.toString()) {
+        const deleteStickyNote = await stickyNoteModel.findByIdAndRemove({
+          _id: id,
+        });
+        if (!deleteStickyNote) {
+          return res
+            .status(404)
+            .json({ message: "It's your sticky note, but there is an error" });
+        }
+        res.status(200).json({ message: "Sticky note deleted successfully" });
+      } else {
+        return res.status(400).json({ message: "That's not your sticky note" });
+      }
+    } else {
+      return res.status(404).json({
+        message: "Sticky note not found",
+      });
+    }
+  } catch (error) {
+    console.log(`Try catch error ${error}`);
+    res.json({ message: error });
+  }
 };
 
 module.exports = {

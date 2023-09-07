@@ -12,10 +12,8 @@ const authMdlwr = async (req, res, next) => {
       token = req.headers.authorization.substring("Bearer ".length);
 
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-      console.log("Decoded Token", decodedToken);
 
       req.user = await userModel.findById(decodedToken.id);
-      console.log("req.user", req.user);
 
       next();
     } catch (error) {
