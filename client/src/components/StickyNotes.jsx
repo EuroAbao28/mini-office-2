@@ -5,6 +5,7 @@ import { LuPlusSquare, LuEdit, LuTrash2, LuCopy } from "react-icons/lu";
 import { HiMenuAlt2 } from "react-icons/hi";
 import ModalAddStickyNotes from "./ModalAddStickyNotes";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function StickyNotes({ isNavOpen, toggleNav }) {
   const [isModalShow, setIsModalShow] = useState(false);
@@ -12,9 +13,6 @@ function StickyNotes({ isNavOpen, toggleNav }) {
 
   //for showing options in the clicked note
   const [clickedNote, setClickedCard] = useState("");
-
-  // for copying the note
-  const [isCopied, setIsCopied] = useState(false);
 
   // accent colors darkened
   const yellow_dark = "#ff6675";
@@ -40,7 +38,11 @@ function StickyNotes({ isNavOpen, toggleNav }) {
   const handleCopyNote = async (textBody) => {
     try {
       await copy(textBody);
-      setIsCopied(true);
+      toast.success("Sticky note copied", {
+        className: "toast-container",
+        position: "top-center",
+        autoClose: 1000,
+      });
       console.log("Copied note: ", textBody);
     } catch (error) {
       console.error("Copy failed: ", error);

@@ -90,3 +90,8 @@ textarea:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--black-2);
 }
+
+.toast-container {
+  font-size: 1.4rem;
+  border-radius: 1rem;
+}

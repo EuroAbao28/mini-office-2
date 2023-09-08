@@ -9,6 +9,7 @@ import {
 } from "react-icons/lu";
 import "./SideNav.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SideNav({ clickedLink, username, isNavOpen, toggleNav }) {
   const navigate = useNavigate();
@@ -20,6 +21,10 @@ function SideNav({ clickedLink, username, isNavOpen, toggleNav }) {
 
   const handleSignout = () => {
     localStorage.removeItem("user_token");
+    toast.success("Logged out successfully", {
+      className: "toast-container",
+      autoClose: 2000,
+    });
     navigate("/login");
   };
 

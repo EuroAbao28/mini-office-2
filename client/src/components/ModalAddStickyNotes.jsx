@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ModalAddStickyNotes.css";
 import { LuXSquare } from "react-icons/lu";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function ModalAddStickyNotes({ modalState, refreshData }) {
   const [title, setTitle] = useState("");
@@ -27,6 +28,10 @@ function ModalAddStickyNotes({ modalState, refreshData }) {
           .post(createStickyNoteURL, { title, body, color })
           .then((response) => {
             console.log(response.data.message);
+            toast.success(response.data.message, {
+              className: "toast-container",
+              autoClose: 2000,
+            });
 
             // refresh the data
             refreshData();
@@ -35,6 +40,10 @@ function ModalAddStickyNotes({ modalState, refreshData }) {
           })
           .catch((error) => {
             console.log(error.response.data.message);
+            toast.error(error.response.data.message, {
+              className: "toast-container",
+              autoClose: 2000,
+            });
           });
       } else {
         console.log("No token");
@@ -143,7 +152,12 @@ function ModalAddStickyNotes({ modalState, refreshData }) {
           </div>
         </div>
         <div className="button-container">
-          <button onClick={handleCreateNote}>Create note</button>
+          <button
+            className={!title || !body || !color ? "disabled" : ""}
+            disabled={!title || !body || !color ? true : false}
+            onClick={handleCreateNote}>
+            Create note
+          </button>
         </div>
       </div>
     </div>

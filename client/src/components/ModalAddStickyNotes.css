@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   position: absolute;
-  z-index: 10;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,15 +85,23 @@
 .modal-addStickyNotes-container .modal-form-container button:active {
   box-shadow: var(--shadow-button-pressed);
 }
+
+.modal-addStickyNotes-container .modal-form-container .disabled {
+  background-color: var(--bg-grey);
+  box-shadow: none;
+  cursor: default;
+}
+
 .modal-addStickyNotes-container .colors-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-top: 0.5rem;
   width: 100%;
 }
 
 .modal-addStickyNotes-container .colors-container .item {
+  flex: 1 1;
   display: flex;
   gap: 0.5rem;
   align-items: center;

@@ -3,6 +3,7 @@ import "./Login.css";
 import loginPNG from "../assets/login.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Signup() {
   const navigate = useNavigate();
@@ -30,10 +31,18 @@ function Signup() {
       .post(registerURL, formData)
       .then((response) => {
         console.log(response.data);
+        toast.success(response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
         navigate("/login");
       })
       .catch((error) => {
         console.log(error.response.data);
+        toast.error(error.response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
       });
   };
 
