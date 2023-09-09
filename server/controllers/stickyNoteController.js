@@ -20,7 +20,7 @@ const createStickyNote = async (req, res) => {
 
   try {
     await stickyNoteModel.create({ user: req.user.id, title, body, color });
-    res.status(201).json({ message: "New Sticky note added" });
+    res.status(201).json({ message: "Note added" });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: `Try catch error: ${error}` });
@@ -49,7 +49,7 @@ const updateStickyNote = async (req, res) => {
             .status(404)
             .json({ message: "It's your sticky note, but there is an error" });
         }
-        res.status(201).json({ message: "Sticky note updated successfully" });
+        res.status(201).json({ message: "Updated successfully" });
       } else {
         return res.status(400).json({ message: "That's not your sticky note" });
       }
@@ -81,7 +81,7 @@ const deleteStickyNote = async (req, res) => {
             .status(404)
             .json({ message: "It's your sticky note, but there is an error" });
         }
-        res.status(200).json({ message: "Sticky note deleted successfully" });
+        res.status(200).json({ message: "Deleted successfully" });
       } else {
         return res.status(400).json({ message: "That's not your sticky note" });
       }

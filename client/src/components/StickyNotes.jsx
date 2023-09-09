@@ -6,9 +6,12 @@ import { HiMenuAlt2 } from "react-icons/hi";
 import ModalAddStickyNotes from "./ModalAddStickyNotes";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ModalEditStickyNote from "./ModalEditStickyNote";
 
 function StickyNotes({ isNavOpen, toggleNav }) {
   const [isModalShow, setIsModalShow] = useState(false);
+  const [isEditModalShow, setIsEditModalShow] = useState(false);
+  const [noteToEdit, setNoteToEdit] = useState({});
   const [notes, setNotes] = useState([]);
 
   //for showing options in the clicked note
@@ -59,7 +62,7 @@ function StickyNotes({ isNavOpen, toggleNav }) {
       axios
         .get(getStickyNotesURL)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           setNotes(response.data);
         })
         .catch((error) => {
@@ -68,6 +71,37 @@ function StickyNotes({ isNavOpen, toggleNav }) {
     } else {
       console.log("No token");
     }
+  };
+
+  const handleEditNote = (noteData) => {
+    setIsEditModalShow(true);
+    setNoteToEdit(noteData);
+  };
+
+  const handleDeleteNote = (noteID) => {
+    const userToken = localStorage.getItem("user_token");
+
+    const axiosInstance = axios.create({
+      baseURL: "http://localhost:5000/api/stickynote",
+      headers: { Authorization: `Bearer ${userToken}` },
+    });
+
+    axiosInstance
+      .delete(`/${noteID}`)
+      .then((response) => {
+        toast.success(response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
+        getStickyNotes();
+      })
+      .catch((error) => {
+        // console.log(error.response.data);
+        toast.error(error.response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
+      });
   };
 
   useEffect(() => {
@@ -79,6 +113,13 @@ function StickyNotes({ isNavOpen, toggleNav }) {
       {isModalShow && (
         <ModalAddStickyNotes
           modalState={(state) => setIsModalShow(state)}
+          refreshData={getStickyNotes}
+        />
+      )}
+      {isEditModalShow && (
+        <ModalEditStickyNote
+          modalState={(state) => setIsEditModalShow(state)}
+          noteToEdit={noteToEdit}
           refreshData={getStickyNotes}
         />
       )}
@@ -112,11 +153,17 @@ function StickyNotes({ isNavOpen, toggleNav }) {
                   }`}
                   style={{ backgroundColor: note.color }}>
                   <LuCopy
-                    onClick={() => handleCopyNote(note.body)}
                     className="copy"
+                    onClick={() => handleCopyNote(note.body)}
                   />
-                  <LuEdit className="edit" />
-                  <LuTrash2 className="delete" />
+                  <LuEdit
+                    className="edit"
+                    onClick={() => handleEditNote(note)}
+                  />
+                  <LuTrash2
+                    className="delete"
+                    onClick={() => handleDeleteNote(note._id)}
+                  />
                 </div>
 
                 <p className="title">{note.title}</p>
