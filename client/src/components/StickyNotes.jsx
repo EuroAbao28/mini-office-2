@@ -17,6 +17,9 @@ function StickyNotes({ isNavOpen, toggleNav }) {
   //for showing options in the clicked note
   const [clickedNote, setClickedCard] = useState("");
 
+  // for text copy notifier. For note id
+  const [copied, setCopied] = useState("");
+
   // accent colors darkened
   const yellow_dark = "#ff6675";
   const green_dark = " #ffb866";
@@ -38,15 +41,12 @@ function StickyNotes({ isNavOpen, toggleNav }) {
     }
   };
 
-  const handleCopyNote = async (textBody) => {
+  const handleCopyNote = async (note) => {
     try {
-      await copy(textBody);
-      toast.success("Sticky note copied", {
-        className: "toast-container",
-        position: "top-center",
-        autoClose: 1000,
-      });
-      console.log("Copied note: ", textBody);
+      await copy(note.body);
+      setCopied(note._id);
+      // setTimeout(() => setCopied(""), 3000);
+      console.log("Copied note: ", note.body);
     } catch (error) {
       console.error("Copy failed: ", error);
     }
@@ -154,7 +154,7 @@ function StickyNotes({ isNavOpen, toggleNav }) {
                   style={{ backgroundColor: note.color }}>
                   <LuCopy
                     className="copy"
-                    onClick={() => handleCopyNote(note.body)}
+                    onClick={() => handleCopyNote(note)}
                   />
                   <LuEdit
                     className="edit"
@@ -165,7 +165,9 @@ function StickyNotes({ isNavOpen, toggleNav }) {
                     onClick={() => handleDeleteNote(note._id)}
                   />
                 </div>
-
+                {/* copied notifier */}
+                {/* <p className={`copied-notif ${copied && "show"}`}>copied</p> */}
+                {copied == note._id && <p className="copied-notif">copied</p>}
                 <p className="title">{note.title}</p>
                 <p className="body">{note.body}</p>
               </div>

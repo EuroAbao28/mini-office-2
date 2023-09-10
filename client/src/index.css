@@ -17,6 +17,14 @@
   --acnt-blue: hsl(206, 100%, 86%);
   --acnt-purple: hsl(294, 100%, 86%);
 
+  /* accent colors lighten */
+  --acnt-red: #ffd6da;
+  --acnt-orange: #ffecd6;
+  --acnt-yellow: #ffffd6;
+  --acnt-green: #d6ffdf;
+  --acnt-blue: #d6edff;
+  --acnt-purple: #fbd6ff;
+
   /* accent colors darkened */
   --acnt-red-drk: hsl(354, 100%, 70%);
   --acnt-orange-drk: hsl(32, 100%, 70%);
