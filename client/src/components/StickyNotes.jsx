@@ -167,6 +167,8 @@ function StickyNotes({ isNavOpen, toggleNav }) {
                 </div>
                 {/* copied notifier */}
                 {/* <p className={`copied-notif ${copied && "show"}`}>copied</p> */}
+
+                {/* AYUSIN MO TO, KASI KAPAG NAG COPY AKO TAS NAG DELETE, LUMALABAS YUNG COPY TEXT */}
                 {copied == note._id && <p className="copied-notif">copied</p>}
                 <p className="title">{note.title}</p>
                 <p className="body">{note.body}</p>
