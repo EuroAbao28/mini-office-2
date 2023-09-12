@@ -25,7 +25,8 @@ function ModalEditStickyNote({ modalState, refreshData, noteToEdit }) {
       const userToken = localStorage.getItem("user_token");
 
       const axiosInstance = axios.create({
-        baseURL: "https://mini-office-2.onrender.com/api/stickynote",
+        // baseURL: "https://mini-office-2.onrender.com/api/stickynote",
+        baseURL: "http://localhost:5000/api/stickynote",
         headers: { Authorization: `Bearer ${userToken}` },
       });
 
@@ -52,12 +53,12 @@ function ModalEditStickyNote({ modalState, refreshData, noteToEdit }) {
   };
 
   // Note Colors
-  const yellow = "#ffffb8";
-  const green = "#b8ffc7";
-  const blue = "#b8e0ff";
-  const orange = "#ffdeb8";
-  const red = "#ffb8bf";
-  const purple = "#f8b8ff";
+  const yellow = "#ffffd6";
+  const green = "#d6ffdf";
+  const blue = "#d6edff";
+  const orange = "#ffecd6";
+  const red = "#ffd6da";
+  const purple = "#fbd6ff";
 
   return (
     <div className="modal-addStickyNotes-container">

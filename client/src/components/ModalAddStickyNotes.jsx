@@ -19,7 +19,8 @@ function ModalAddStickyNotes({ modalState, refreshData }) {
   const handleCreateNote = () => {
     if (title && body && color) {
       const createStickyNoteURL =
-        "https://mini-office-2.onrender.com/api/stickynote/";
+        // "https://mini-office-2.onrender.com/api/stickynote/";
+        "http://localhost:5000/api/stickynote/";
       const userToken = localStorage.getItem("user_token");
 
       if (userToken) {
