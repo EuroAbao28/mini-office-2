@@ -86,10 +86,9 @@
   border: none;
   font-size: 1.4rem;
   color: var(--black-8);
-  text-transform: capitalize;
 }
 
-.checklist-container .addlist-container form button {
+.checklist-container .addlist-container form .add {
   border: none;
   padding: 0.75rem 1.5rem;
   cursor: pointer;
@@ -97,6 +96,12 @@
   background-color: var(--bg-grey);
   outline: 1px solid var(--black-1);
   color: var(--black-8);
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+}
+
+.checklist-container .addlist-container .add.hidden {
+  opacity: 0;
 }
 
 .checklist-container .grandparent-lists-container {
@@ -143,11 +148,20 @@
 .checklist-container .item-container .index {
   color: var(--black-3);
   font-size: 1.2rem;
+  margin-right: 1rem;
 }
 
 .checklist-container .item-container .title {
   flex: 1;
-  margin-left: 1rem;
+}
+
+.checklist-container .item-container form {
+  flex: 1;
+}
+
+.checklist-container .item-container form input {
+  width: 100%;
+  border: none;
 }
 
 .checklist-container .item-container .actions {
