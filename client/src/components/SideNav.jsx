@@ -48,9 +48,9 @@ function SideNav({ clickedLink, username, isNavOpen, toggleNav }) {
           <div className="top">
             <div
               className="tab-container"
-              onClick={() => linkSetter("todolist")}>
+              onClick={() => linkSetter("checklist")}>
               <LuListChecks className="icon" />
-              <p>Todo list</p>
+              <p>Checklist</p>
             </div>
             <div
               className="tab-container"

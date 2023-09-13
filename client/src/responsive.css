@@ -1,0 +1,9 @@
+@media screen and (max-width: 800px) {
+  .app-container .login-container .form {
+    width: 90%;
+  }
+
+  .app-container .login-container .form .left {
+    display: none;
+  }
+}

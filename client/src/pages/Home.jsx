@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import SideNav from "../components/SideNav";
-import TodoList from "../components/TodoList";
+import CheckList from "../components/CheckList";
 import StickyNotes from "../components/StickyNotes";
 import Calendar from "../components/Calendar";
 import axios from "axios";
@@ -11,7 +11,7 @@ function Home() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const [isNavOpen, setIsNavOpen] = useState(true);
-  const [selectedLink, setSelectedLink] = useState("todolist");
+  const [selectedLink, setSelectedLink] = useState("checklist");
 
   const clickedLink = (link) => {
     setSelectedLink(link);
@@ -56,8 +56,8 @@ function Home() {
         toggleNav={handleSideNav}
       />
       <div className="home-child-container">
-        {selectedLink == "todolist" && (
-          <TodoList isNavOpen={isNavOpen} toggleNav={handleSideNav} />
+        {selectedLink == "checklist" && (
+          <CheckList isNavOpen={isNavOpen} toggleNav={handleSideNav} />
         )}
         {selectedLink == "stickynotes" && (
           <StickyNotes isNavOpen={isNavOpen} toggleNav={handleSideNav} />

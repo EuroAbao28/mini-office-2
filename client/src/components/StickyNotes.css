@@ -65,12 +65,12 @@
   background-color: var(--bg-grey);
 }
 
-.stickynotes-content-container {
+.stickynotes-container .scrollable-container {
   flex: 1;
   display: flex;
   border: 1px solid var(--black-1);
   border-radius: 1rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   position: relative;
 }
 

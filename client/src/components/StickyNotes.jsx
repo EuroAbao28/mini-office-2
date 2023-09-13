@@ -20,14 +20,6 @@ function StickyNotes({ isNavOpen, toggleNav }) {
   // for text copy notifier. For note id
   const [copied, setCopied] = useState("");
 
-  // accent colors darkened
-  const yellow_dark = "#ff6675";
-  const green_dark = " #ffb866";
-  const blue_dark = "#ffff66";
-  const orange_dark = " #66ff87";
-  const red_dark = "#66bdff";
-  const purple_dark = " #f066ff";
-
   const addNote = () => {
     setIsModalShow(!isModalShow);
   };
@@ -143,7 +135,7 @@ function StickyNotes({ isNavOpen, toggleNav }) {
             Add new
           </div>
         </div>
-        <div className="stickynotes-content-container">
+        <div className="scrollable-container">
           <div className="child-container">
             {notes.map((note, index) => (
               <div
