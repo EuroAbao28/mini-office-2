@@ -2,49 +2,174 @@ import React, { useEffect, useState } from "react";
 import { LuPlus, LuPencil, LuX, LuCheck, LuUndo2 } from "react-icons/lu";
 import { HiMenuAlt2 } from "react-icons/hi";
 import "./CheckList.css";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function CheckList({ isNavOpen, toggleNav }) {
-  const [todoList, setTodoList] = useState([]);
+  const [todolist, setTodoList] = useState([]);
   const [donelist, setDoneList] = useState([]);
   const [title, setTitle] = useState("");
+  const [isDone, setIsDone] = useState("");
   const [editTitle, setEditTitile] = useState("");
-  const [indexToEdit, setIndexToEdit] = useState(null);
+  const [idToEdit, setIdToEdit] = useState(null);
+
+  const getTodos = () => {
+    const getChecklistURL = "http://localhost:5000/api/checklist/";
+    const userToken = localStorage.getItem("user_token");
+
+    if (userToken) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+      axios
+        .get(getChecklistURL)
+        .then((response) => {
+          setTodoList(response.data.filter((item) => item.isDone === false));
+          setDoneList(response.data.filter((item) => item.isDone === true));
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+        });
+    } else {
+      console.log("No token");
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTodoList((prevState) => [...prevState, title]);
-    setTitle("");
+
+    if (title) {
+      const createChecklistURL = "http://localhost:5000/api/checklist/";
+      const userToken = localStorage.getItem("user_token");
+
+      if (userToken) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        axios
+          .post(createChecklistURL, { title })
+          .then((response) => {
+            toast.success(response.data.message, {
+              className: "toast-container",
+              autoClose: 2000,
+            });
+            // clear the title
+            setTitle("");
+            // refresh list
+            getTodos();
+          })
+          .catch((error) => {
+            console.log(error.response.data.message);
+            toast.error(error.response.data.message, {
+              className: "toast-container",
+              autoClose: 2000,
+            });
+          });
+      } else {
+        console.log("No token");
+      }
+    } else {
+      console.log("All fields are required");
+    }
   };
 
-  const handleSetToDone = (itemIndex) => {
-    setDoneList((prevState) => [...prevState, todoList[itemIndex]]);
-    setTodoList((prevState) =>
-      prevState.filter((item, index) => index !== itemIndex)
-    );
+  const handleSetToDone = (id) => {
+    const userToken = localStorage.getItem("user_token");
+    const axiosInstance = axios.create({
+      baseURL: "http://localhost:5000/api/checklist",
+      headers: { Authorization: `Bearer ${userToken}` },
+    });
+
+    axiosInstance
+      .patch(`/${id}`, { isDone: true })
+      .then((response) => {
+        getTodos();
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        toast.error(error.response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
+      });
   };
 
-  const handleSaveEdit = (itemIndex) => {
-    // Create a new copy of the todoList array
-    const updatedTodoList = [...todoList];
+  const handleUnSetToDone = (id) => {
+    const userToken = localStorage.getItem("user_token");
+    const axiosInstance = axios.create({
+      baseURL: "http://localhost:5000/api/checklist",
+      headers: { Authorization: `Bearer ${userToken}` },
+    });
 
-    // Update the title of the item at the specified index
-    updatedTodoList[itemIndex] = editTitle;
-
-    // Update the state with the modified todoList
-    setTodoList(updatedTodoList);
-
-    // Clear the editTitle and reset indexToEdit to null
-    setEditTitile("");
-    setIndexToEdit(null);
+    axiosInstance
+      .patch(`/${id}`, { isDone: false })
+      .then((response) => {
+        getTodos();
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        toast.error(error.response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
+      });
   };
 
-  // TULOY MO SA DONE
+  const handleSaveEdit = (e, id) => {
+    e.preventDefault();
 
-  const handleDeletTodo = (itemIndex) => {
-    setTodoList((prevState) =>
-      prevState.filter((item, index) => index !== itemIndex)
-    );
+    const userToken = localStorage.getItem("user_token");
+    const axiosInstance = axios.create({
+      baseURL: "http://localhost:5000/api/checklist",
+      headers: { Authorization: `Bearer ${userToken}` },
+    });
+
+    axiosInstance
+      .patch(`/${id}`, { title: editTitle })
+      .then((response) => {
+        toast.success(response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
+        if (response) {
+          getTodos();
+          setIdToEdit(null);
+          setEditTitile("");
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        toast.error(error.response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
+      });
   };
+
+  const handleDelete = (id) => {
+    const userToken = localStorage.getItem("user_token");
+    const axiosInstance = axios.create({
+      baseURL: "http://localhost:5000/api/checklist",
+      headers: { Authorization: `Bearer ${userToken}` },
+    });
+
+    axiosInstance
+      .delete(`/${id}`)
+      .then((response) => {
+        toast.success(response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
+        getTodos();
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        toast.error(error.response.data.message, {
+          className: "toast-container",
+          autoClose: 2000,
+        });
+      });
+  };
+
+  useEffect(() => {
+    getTodos();
+  }, []);
 
   return (
     <div className="checklist-container">
@@ -74,25 +199,25 @@ function CheckList({ isNavOpen, toggleNav }) {
             <h1>Todo</h1>
             <div className="scrollable-container">
               <div className="lists-container">
-                {todoList.map((item, index) => (
-                  <div className="item-container" key={index}>
+                {todolist.map((item, index) => (
+                  <div className="item-container" key={item._id}>
                     <p className="index">{index + 1}</p>
-                    {indexToEdit == index ? (
-                      <form onSubmit={() => handleSaveEdit(index)}>
+                    {idToEdit == item._id ? (
+                      <form onSubmit={(e) => handleSaveEdit(e, item._id)}>
                         <input
                           type="text"
-                          placeholder={item}
+                          placeholder={item.title}
                           value={editTitle}
                           onChange={(e) => setEditTitile(e.target.value)}
                         />
                       </form>
                     ) : (
-                      <p className="title">{item}</p>
+                      <p className="title">{item.title}</p>
                     )}
                     <div className="actions">
-                      <LuCheck onClick={() => handleSetToDone(index)} />
-                      <LuPencil onClick={() => setIndexToEdit(index)} />
-                      <LuX onClick={() => handleDeletTodo(index)} />
+                      <LuCheck onClick={() => handleSetToDone(item._id)} />
+                      <LuPencil onClick={() => setIdToEdit(item._id)} />
+                      <LuX onClick={() => handleDelete(item._id)} />
                     </div>
                   </div>
                 ))}
@@ -104,13 +229,24 @@ function CheckList({ isNavOpen, toggleNav }) {
             <div className="scrollable-container">
               <div className="lists-container">
                 {donelist.map((item, index) => (
-                  <div className="item-container" key={index}>
+                  <div className="item-container" key={item._id}>
                     <p className="index">{index + 1}</p>
-                    <p className="title">{item}</p>
+                    {idToEdit == item._id ? (
+                      <form onSubmit={(e) => handleSaveEdit(e, item._id)}>
+                        <input
+                          type="text"
+                          placeholder={item.title}
+                          value={editTitle}
+                          onChange={(e) => setEditTitile(e.target.value)}
+                        />
+                      </form>
+                    ) : (
+                      <p className="title">{item.title}</p>
+                    )}
                     <div className="actions">
-                      <LuCheck />
-                      <LuPencil />
-                      <LuX />
+                      <LuUndo2 onClick={() => handleUnSetToDone(item._id)} />
+                      <LuPencil onClick={() => setIdToEdit(item._id)} />
+                      <LuX onClick={() => handleDelete(item._id)} />
                     </div>
                   </div>
                 ))}

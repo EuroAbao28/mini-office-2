@@ -16,7 +16,7 @@ const createStickyNote = async (req, res) => {
   const { title, body, color } = req.body;
 
   if (!title || !body || !color)
-    return res.json({ message: "All fields are required" });
+    return res.status(400).json({ message: "All fields are required" });
 
   try {
     await stickyNoteModel.create({ user: req.user.id, title, body, color });

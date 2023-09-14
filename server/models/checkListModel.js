@@ -11,7 +11,7 @@ const checkListSchema = mongoose.Schema(
     title: reqString,
     isDone: { type: Boolean, required: true },
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("CheckList", checkListSchema);

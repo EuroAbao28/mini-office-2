@@ -12,7 +12,7 @@ const stickyNoteSchema = mongoose.Schema(
     body: reqString,
     color: reqString,
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("StickyNote", stickyNoteSchema);

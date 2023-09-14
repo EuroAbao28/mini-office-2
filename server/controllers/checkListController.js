@@ -2,7 +2,11 @@ const checkListModel = require("../models/checkListModel");
 
 const getCheckList = async (req, res) => {
   try {
-    const checkList = await checkListModel.find({ user: req.user.id });
+    const checkList = await checkListModel
+      .find({
+        user: req.user.id,
+      })
+      .sort({ createdAt: -1, updatedAt: -1 });
     res.status(200).json(checkList);
   } catch (error) {
     console.log(error);
@@ -11,16 +15,16 @@ const getCheckList = async (req, res) => {
 };
 
 const createCheckList = async (req, res) => {
-  const { title, isDone } = req.body;
+  const { title } = req.body;
 
-  if (!title || !isDone)
-    return res.json({ message: "All fields are required" });
+  if (!title)
+    return res.status(400).json({ message: "All fields are required" });
 
   try {
     await checkListModel.create({
       user: req.user.id,
       title,
-      isDone,
+      isDone: false,
     });
     res.status(201).json({ message: "Item added" });
   } catch (error) {
