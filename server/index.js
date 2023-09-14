@@ -16,5 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/users", require("./routes/userRoute"));
 app.use("/api/stickynote", require("./routes/stickyNoteRoute"));
+app.use("/api/checklist", require("./routes/checkListRoute"));
 
 app.listen(port, () => console.log("Server running on port:", port));

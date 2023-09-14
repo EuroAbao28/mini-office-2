@@ -38,6 +38,8 @@ function CheckList({ isNavOpen, toggleNav }) {
     setIndexToEdit(null);
   };
 
+  // TULOY MO SA DONE
+
   const handleDeletTodo = (itemIndex) => {
     setTodoList((prevState) =>
       prevState.filter((item, index) => index !== itemIndex)
