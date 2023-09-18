@@ -1,0 +1,71 @@
+.calendar-container {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-container .header {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  color: var(--black-8);
+}
+
+.calendar-container .header {
+  display: flex;
+  align-items: center;
+}
+
+.calendar-container .header .icon {
+  border-radius: 0.5rem;
+  cursor: pointer;
+  animation-name: iconShowAnim;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes iconShowAnim {
+  0% {
+    font-size: 0;
+    opacity: 0;
+    margin-right: 0;
+    padding: 0;
+    transform: scale(0);
+  }
+  100% {
+    font-size: 4rem;
+    opacity: 1;
+    margin-right: 2rem;
+    padding: 0.5rem;
+    transform: scale(1);
+  }
+}
+
+.calendar-container .header .icon:hover {
+  background-color: var(--bg-grey);
+}
+
+.calendar-container .header h1 {
+  font-size: 4rem;
+}
+
+.calendar-container .body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-container .body img {
+  width: 40%;
+  object-fit: contain;
+  margin-top: -8rem;
+}
+
+.calendar-container .body h1 {
+  font-size: 4rem;
+  text-transform: uppercase;
+  color: var(--black-8);
+}
