@@ -23,8 +23,7 @@ function Home() {
 
       if (userToken) {
         const checkUserTokenURL =
-          // "https://mini-office-2.onrender.com/api/users/checkusertoken";
-          "http://localhost:5000/api/users/checkusertoken";
+          "https://mini-office-2.onrender.com/api/users/checkusertoken";
 
         axios
           .post(checkUserTokenURL, { userToken })

@@ -14,7 +14,7 @@ function CheckList({ isNavOpen, toggleNav }) {
   const [idToEdit, setIdToEdit] = useState(null);
 
   const getTodos = () => {
-    const getChecklistURL = "http://localhost:5000/api/checklist/";
+    const getChecklistURL = "https://mini-office-2.onrender.com/api/checklist/";
     const userToken = localStorage.getItem("user_token");
 
     if (userToken) {
@@ -37,7 +37,8 @@ function CheckList({ isNavOpen, toggleNav }) {
     e.preventDefault();
 
     if (title) {
-      const createChecklistURL = "http://localhost:5000/api/checklist/";
+      const createChecklistURL =
+        "https://mini-office-2.onrender.com/api/checklist/";
       const userToken = localStorage.getItem("user_token");
 
       if (userToken) {
@@ -72,7 +73,7 @@ function CheckList({ isNavOpen, toggleNav }) {
   const handleSetToDone = (id) => {
     const userToken = localStorage.getItem("user_token");
     const axiosInstance = axios.create({
-      baseURL: "http://localhost:5000/api/checklist",
+      baseURL: "https://mini-office-2.onrender.com/api/checklist",
       headers: { Authorization: `Bearer ${userToken}` },
     });
 
@@ -93,7 +94,7 @@ function CheckList({ isNavOpen, toggleNav }) {
   const handleUnSetToDone = (id) => {
     const userToken = localStorage.getItem("user_token");
     const axiosInstance = axios.create({
-      baseURL: "http://localhost:5000/api/checklist",
+      baseURL: "https://mini-office-2.onrender.com/api/checklist",
       headers: { Authorization: `Bearer ${userToken}` },
     });
 
@@ -116,7 +117,7 @@ function CheckList({ isNavOpen, toggleNav }) {
 
     const userToken = localStorage.getItem("user_token");
     const axiosInstance = axios.create({
-      baseURL: "http://localhost:5000/api/checklist",
+      baseURL: "https://mini-office-2.onrender.com/api/checklist",
       headers: { Authorization: `Bearer ${userToken}` },
     });
 
@@ -145,7 +146,7 @@ function CheckList({ isNavOpen, toggleNav }) {
   const handleDelete = (id) => {
     const userToken = localStorage.getItem("user_token");
     const axiosInstance = axios.create({
-      baseURL: "http://localhost:5000/api/checklist",
+      baseURL: "https://mini-office-2.onrender.com/api/checklist",
       headers: { Authorization: `Bearer ${userToken}` },
     });
 

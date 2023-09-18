@@ -25,8 +25,7 @@ function Signup() {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // const registerURL = "https://mini-office-2.onrender.com/api/users/register";
-    const registerURL = "http://localhost:5000/api/users/register";
+    const registerURL = "https://mini-office-2.onrender.com/api/users/register";
 
     axios
       .post(registerURL, formData)

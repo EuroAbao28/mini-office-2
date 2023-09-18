@@ -23,9 +23,7 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // const loginURL = "https://mini-office-2.onrender.com/api/users/login";
-    const loginURL = "http://localhost:5000/api/users/login";
+    const loginURL = "https://mini-office-2.onrender.com/api/users/login";
 
     axios
       .post(loginURL, formData)

@@ -25,8 +25,7 @@ function ModalEditStickyNote({ modalState, refreshData, noteToEdit }) {
       const userToken = localStorage.getItem("user_token");
 
       const axiosInstance = axios.create({
-        // baseURL: "https://mini-office-2.onrender.com/api/stickynote",
-        baseURL: "http://localhost:5000/api/stickynote",
+        baseURL: "https://mini-office-2.onrender.com/api/stickynote",
         headers: { Authorization: `Bearer ${userToken}` },
       });
 
